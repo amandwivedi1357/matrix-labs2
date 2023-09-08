@@ -3,6 +3,9 @@ import styled from 'styled-components'
 
 
 import { InnerLayout } from '../../styles/Layouts';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { TbPhotoHexagon } from 'react-icons/tb';
+import { LiaDollarSignSolid } from 'react-icons/lia';
 
 
 
@@ -56,7 +59,7 @@ function TokenAddress() {
                         
                     </div>
                     </div>
-                    <h3 style={{color:'#fff'}}>Token Search Results</h3>
+                    <h3 style={{color:'#fff',marginTop:'10px'}}>Token Search Results</h3>
                 <div className='results'>
                 {results?.map((item)=>(
                     <div key={item.pairAddress} className='one-data'>
@@ -75,6 +78,14 @@ function TokenAddress() {
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
                                 </div>
+                                <div className='icon'>
+                                    <div className='in_icon'>
+                                        
+                                        <AiOutlineInfoCircle  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div >
                         <div className='container base'>
@@ -89,6 +100,14 @@ function TokenAddress() {
                                 
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
+                                </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <TbPhotoHexagon  size={'30px'}/>
+                                        
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,6 +124,14 @@ function TokenAddress() {
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
                                 </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <TbPhotoHexagon  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+</div>
                             </div>
                         </div>
                         <div className='container price'>
@@ -117,6 +144,14 @@ function TokenAddress() {
                                 <div className='flex'>
                                     <span>Price USD</span>   <span>$ {item.priceUsd}</span>
                                 </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <LiaDollarSignSolid  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+</div>
                             </div>
                         </div>
                     </div>
@@ -235,6 +270,26 @@ const DashboardStyled = styled.div`
             grid-template-columns: repeat(2,1fr);
             span{
               font-size:12px ;
+            }
+        }
+        .icon{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e70aca;
+            margin-left: 80%;
+            .in_icon{
+                width: 50%;
+                height: 50%;
+                padding: 10px;
+
+                
+            }
+        }
+        @media screen and (max-width: 768px){
+            .inner-cont{
+                display: grid;
+                grid-template-columns: repeat(1,1fr);
             }
         }
 

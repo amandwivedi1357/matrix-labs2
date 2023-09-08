@@ -1,19 +1,36 @@
-import React, { useState } from 'react'
+import {useState,useEffect} from "react"
 import styled from 'styled-components'
 import gal from '../../img/gal.png'
-import { signout } from '../../utils/Icons'
+
 import { menuItems } from '../../utils/menuItems'
 import {AiFillFacebook, AiFillLinkedin, AiFillTwitterCircle} from "react-icons/ai"
+import { GiHamburgerMenu } from "react-icons/gi"
+
 
 function Navigation({active, setActive}) {
+    const [size, setSize] = useState([window.innerWidth, window.innerHeight])
+
+    useEffect(() => {
+        const updateSize = () => {
+            setSize([window.innerWidth, window.innerHeight])
+        }
+        window.addEventListener('resize', updateSize)
+
+        return () => window.removeEventListener('resize', updateSize)
+    }, [])
+
+     
     
     return (
+            
+            
+            <div className='cont'>
+                {  size[0]>=768 &&          
         <NavStyled>
-            <div className="user-con">
+              <div className="user-con">
                 <img src={gal} alt="" />
                 <div className="text">
                     <h2>NFTify</h2>
-                    
                 </div>
             </div>
             <ul className="menu-items">
@@ -36,6 +53,16 @@ function Navigation({active, setActive}) {
                 
             </div>
         </NavStyled>
+        }
+
+        {
+            size[0]<=768 && 
+            <HamStyled className='ham'>
+                <GiHamburgerMenu size={'40px'}/>
+            </HamStyled>
+        }
+            </div>
+            
     )
 }
 
@@ -51,6 +78,8 @@ const NavStyled = styled.nav`
     flex-direction: column;
     justify-content: space-between;
     gap: 2rem;
+
+    
     .user-con{
         height: 100px;
         display: flex;
@@ -126,7 +155,16 @@ const NavStyled = styled.nav`
             border-radius: 0 10px 10px 0;
         }
     }
+
     
 `;
+
+
+const HamStyled = styled.div`
+    color: #fff;
+    margin-top: 50px;
+    margin-left: 30%;
+    
+`
 
 export default Navigation

@@ -1,21 +1,25 @@
-import  { useEffect,  useState } from 'react'
+import  { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { v4 as uuidv4 } from 'uuid';
+
 
 import { InnerLayout } from '../../styles/Layouts';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { TbPhotoHexagon } from 'react-icons/tb';
+import { LiaDollarSignSolid } from 'react-icons/lia';
 
 
 
-function Dashboard() {
+
+function Pairs() {
     const BaseUrl = 'https://api.dexscreener.com/latest/dex/pairs/bsc/0x7213a321F1855CF1779f42c0CD85d3D95291D34C,0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae'
     const [results,setResults] = useState([])
     const [input,setInput] = useState('');
-    const uniqueKey = uuidv4();
-
-
-    const handleInput = ()=>{
     
-         getFilteredResults()
+
+
+    const handleInput = async()=>{
+   
+        await getFilteredResults()
         
       
     }
@@ -44,15 +48,21 @@ function Dashboard() {
             <InnerLayout>
             <div className="nav">
                     <div className="top-nav">
-                        <input type="text" placeholder='Search' 
-                        value={input}
-                        onChange={(e)=>{setInput(e.target.value);handleInput(e)}}/>
+                        <input
+                          type="text"
+                          placeholder='Search'
+                          value={input}
+                          onChange={(e) => {
+                            setInput(e.target.value);
+                            handleInput();
+                        }}/>
                         
                     </div>
                     </div>
+                    <h3 style={{color:'#fff',marginTop:'10px'}}>Pair Search Results</h3>
                 <div className='results'>
                 {results?.map((item)=>(
-                    <div key={uniqueKey} className='one-data'>
+                    <div key={item.pairAddress} className='one-data'>
                         <div className='container info'>
                             <h4>Basic info</h4>
                             <div className='inner-cont'>
@@ -67,6 +77,14 @@ function Dashboard() {
                                 </div>
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
+                                </div>
+                                <div className='icon'>
+                                    <div className='in_icon'>
+                                        
+                                        <AiOutlineInfoCircle  size={'30px'}/>
+                                        
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div >
@@ -83,6 +101,14 @@ function Dashboard() {
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
                                 </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <TbPhotoHexagon  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className='container quote'>
@@ -98,6 +124,14 @@ function Dashboard() {
                                 <div className='flex'>
                                     <span>Pair Address</span>   <span>#{item.pairAddress.slice(-4)}</span>
                                 </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <TbPhotoHexagon  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+</div>
                             </div>
                         </div>
                         <div className='container price'>
@@ -110,6 +144,14 @@ function Dashboard() {
                                 <div className='flex'>
                                     <span>Price USD</span>   <span>$ {item.priceUsd}</span>
                                 </div>
+                                <div className='icon'>
+                                <div className='in_icon'>
+                                        
+                                        <LiaDollarSignSolid  size={'30px'}/>
+                                        
+                                        
+                                    </div>
+</div>
                             </div>
                         </div>
                     </div>
@@ -179,6 +221,12 @@ const DashboardStyled = styled.div`
         }
         .flex{
             padding-bottom: 10px;
+            
+            
+            span{
+                text-align: left;
+                
+            }
         }
         
     }
@@ -217,13 +265,34 @@ const DashboardStyled = styled.div`
             margin-left: 20px;
         }
         .flex{
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            /* justify-content: space-between; */
+            grid-template-columns: repeat(2,1fr);
             span{
-              font-size:15px ;
+              font-size:12px ;
+            }
+        }
+        .icon{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e70aca;
+            margin-left: 80%;
+            .in_icon{
+                width: 50%;
+                height: 50%;
+                padding: 10px;
+
+                
+            }
+        }
+        @media screen and (max-width: 768px){
+            .inner-cont{
+                display: grid;
+                grid-template-columns: repeat(1,1fr);
             }
         }
 
 `;
 
-export default Dashboard
+export default Pairs
